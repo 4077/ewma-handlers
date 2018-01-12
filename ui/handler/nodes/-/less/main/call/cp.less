@@ -1,0 +1,23 @@
+// head {
+@import "../../../../../-/less/common.less";
+
+@__nodeId__: ~"ewma_handlers_ui_handler_nodes__main_call_cp";
+// }
+
+.@{__nodeId__} {
+    background-color: @call_bg_color;
+    border: 1px solid @call_bg_color - #333333;
+    border-top-width: 3px;
+
+    .button {
+        cursor: pointer;
+        float: left;
+        font-size: 11px;
+        padding: 7px;
+        color: @call_color;
+
+        &:hover {
+            background-color: lighten(@call_bg_color, 10%);
+        }
+    }
+}

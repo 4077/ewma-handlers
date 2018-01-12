@@ -2,13 +2,9 @@
 
 class Main extends \Controller
 {
-    private $s;
-
     public function __create()
     {
-        $this->s = &$this->s(false, [
-            'selected_cat_id' => false
-        ]);
+        $this->a() or $this->lock();
     }
 
     public function reload()
@@ -20,64 +16,32 @@ class Main extends \Controller
     {
         $v = $this->v();
 
-        $context = 'catItemsEditor';
-        $selectedCatId = $this->s['selected_cat_id'];
+        $s = $this->s(false, [
+            'selected_cat_id'               => false,
+            'selected_handler_id_by_cat_id' => [],
+            'cats_width'                    => 250
+        ]);
 
         $v->assign([
-                       'CATS' => $this->c('cats~:view', [
-                           'context'         => $context,
-                           'selected_cat_id' => $selectedCatId,
-                           'context_data'    => [
-                               'allowed_actions' => [
-                                   'create' => true,
-                                   'delete' => true,
-                                   'move'   => true,
-                                   'sort'   => true,
-                               ],
-                               'callbacks'       => [
-                                   'create' => $this->_abs('callbacks:createCat'),
-                                   'select' => $this->_abs([
-                                                               'callbacks:selectCat',
-                                                               [
-                                                                   'context' => $context
-                                                               ]
-                                                           ])
-                               ]
-                           ]
-                       ])
+                       'CATS'       => $this->c('>cats:view'),
+                       'CATS_WIDTH' => $s['cats_width'],
+                       'HANDLERS'   => $this->c('>handlers:view'),
+                       'HANDLER'    => $this->c('>handler:view')
                    ]);
 
-        if ($selectedCatId) {
-            $v->assign('cat', [
-                'SETTINGS' => $this->c('catSettings~:view', [
-                    'context'      => $context,
-                    'cat_id'       => $selectedCatId,
-                    'context_data' => [
-                        'callbacks' => [
-                            'update_name' => $this->_abs('callbacks:catUpdate'),
-                        ]
-                    ]
-                ]),
-                'ITEMS'    => $this->c('catItems~:view', [
-                    'context'      => $context,
-                    'cat_id'       => $selectedCatId,
-                    'context_data' => [
-                        'assignments_editable' => true,
-                        'allowed_actions'      => [
-                            'create' => true,
-                        ],
-                        'callbacks'            => [
-                            'create' => $this->_abs('callbacks:createItem'),
-                            'select' => $this->_abs('callbacks:selectItem'),
-                        ]
-                    ]
-                ])
-            ]);
-        }
+        $this->c('\std\ui resizable:bind', [
+            'selector'      => $this->_selector('|') . ' .cats',
+            'path'          => '>xhr:updateCatsWidth',
+            'pluginOptions' => [
+                'handles' => 'e'
+            ]
+        ]);
 
         $this->c('\std\ui\dialogs~:addContainer:ewma/handlers');
 
         $this->css();
+
+        $this->app->html->setFavicon(abs_url('-/ewma/favicons/dev_handlers.png'));
 
         return $v;
     }

@@ -1,0 +1,23 @@
+// head {
+@import "../common.less";
+
+@__nodeId__: ~"ewma_handlers_ui_handler__main_cp";
+// }
+
+.@{__nodeId__} {
+    background-color: @handler_bg_color;
+    border: 1px solid @handler_bg_color - #333333;
+    border-top-width: 3px;
+
+    .button {
+        cursor: pointer;
+        float: left;
+        font-size: 11px;
+        padding: 7px;
+        color: @handler_color;
+
+        &:hover {
+            background-color: lighten(@handler_bg_color, 5%);
+        }
+    }
+}

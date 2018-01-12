@@ -1,0 +1,74 @@
+// head {
+@import "../../../../-/less/common.less";
+
+@__nodeId__: ~"ewma_handlers_ui_handler_nodes__main_value";
+// }
+
+.@{__nodeId__} {
+    position: relative;
+
+    &.disabled {
+        opacity: 0.5;
+    }
+
+    > .bar {
+        cursor: pointer;
+        background-color: @value_bg_color;
+        color: @value_color;
+        min-width: 100px;
+
+        > .container {
+            position: relative;
+
+            > input {
+                background-color: @value_bg_color + #101010;
+                color: @value_color;
+                box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3) inset;
+            }
+
+            > .info {
+                float: right;
+            }
+
+            > .value {
+                padding-right: 20px;
+
+                .txt {
+                    float: left;
+                    padding: 7px;
+                    min-height: 13px;
+                    min-width: 13px;
+
+                    &.string {
+
+                    }
+
+                    &.hover {
+                        text-decoration: underline;
+                    }
+                }
+
+                > .bool {
+                    float: left;
+                    padding: 7px 7px;
+
+                    &.true {
+                        color: #293F80;
+                    }
+
+                    &.false {
+                        color: #CF1111;
+                    }
+
+                    &.hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        &.hover {
+            background-color: darken(@value_bg_color, 5%);
+        }
+    }
+}

@@ -2,52 +2,20 @@
 
 class Main extends \Controller
 {
-    private $namedOutputs = [];
-
-    public function compileAllOutputs()
+    public function compile()
     {
-        $outputs = \ewma\handlers\models\Assignment::where('type', 'OUTPUT')->get();
-
-        $this->namedOutputs = aread(abs_path('cache/handlers/namedOutputs.php')); // todo app->cachePath
-
-        foreach ($outputs as $output) {
-            $this->data('output_id', $output->id);
-
-            $this->compileOutput();
-        }
-
-        awrite(abs_path('cache/handlers/namedOutputs.php'), $this->namedOutputs); // todo app->cachePath
+        handlers()->compileAll();
     }
 
-    public function compileOutput()
+    public function compileHandler()
     {
-        $outputId = $this->data['output_id'];
-
-        $output = $this->c('compiler')->compileOutput($outputId);
-
-        if ($output['name']) {
-            $this->namedOutputs[$output['name']] = $outputId;
+        if ($handler = \ewma\handlers\models\Handler::find($this->data('handler_id'))) {
+            return handlers()->compile($handler);
         }
-
-        awrite(abs_path('cache/handlers/outputs/' . $outputId . '.php'), $output); // todo app->cachePath
     }
 
-    public function renderOutput($outputIdOrName, $vars = [])
+    public function render()
     {
-        if (!$vars) {
-            $vars = $this->data;
-        }
-
-        if (is_numeric($outputIdOrName)) {
-            $outputId = $outputIdOrName;
-        } else {
-            $namedOutputs = aread(abs_path('cache/handlers/namedOutputs.php')); // todo app->cachePath
-
-            $outputId = $namedOutputs[$outputIdOrName];
-        }
-
-        $output = aread(abs_path('cache/handlers/outputs/' . $outputId . '.php')); // todo app->cachePath
-
-        return $this->c('renderer')->renderOutput($output, $vars);
+        return handlers()->render($this->data('source'), $this->data('data'));
     }
 }

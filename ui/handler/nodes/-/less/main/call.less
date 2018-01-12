@@ -1,0 +1,74 @@
+// head {
+@import "../../../../-/less/common.less";
+@import "../../../../../../../../modules-vendor/fed/jquery/ui/-/less/icons.less";
+
+@__nodeId__: ~"ewma_handlers_ui_handler_nodes__main_call";
+// }
+
+.@{__nodeId__} {
+    background-color: #FFF;
+
+    &.disabled {
+        opacity: 0.5;
+    }
+
+    > .bar {
+        cursor: pointer;
+        background-color: @call_bg_color;
+        color: @call_color;
+
+        > .container {
+            position: relative;
+
+            > input {
+                background-color: @call_bg_color + #101010;
+                color: @call_color;
+                box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3) inset;
+            }
+
+            > .info {
+                float: right;
+                min-width: 20px;
+                padding: 8px 8px 0;
+
+                > .required {
+                    float: right;
+                    margin: 0;
+                    padding: 1px 3px;
+                    background-color: @call_color;
+                    color: @call_bg_color;
+                    border-radius: 3px;
+                    font-size: 10px;
+                    font-weight: bold;
+                }
+            }
+
+            > .path {
+                float: left;
+
+                .txt {
+                    padding: 8px;
+                    font-size: 11px;
+                    min-height: 11px;
+                    min-width: 13px;
+
+                    &.hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        &.hover {
+            background-color: darken(@call_bg_color, 5%);
+        }
+    }
+
+    > .nodes {
+        border: 1px solid @call_bg_color;
+
+        > .node {
+            margin: 1px;
+        }
+    }
+}

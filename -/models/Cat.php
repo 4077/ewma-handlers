@@ -14,9 +14,9 @@ class Cat extends \Model
         return $this->belongsTo(self::class, 'parent_id');
     }
 
-    public function items()
+    public function handlers()
     {
-        return $this->hasMany(CatItem::class);
+        return $this->morphMany(Handler::class, 'target');
     }
 }
 

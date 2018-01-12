@@ -1,0 +1,90 @@
+// head {
+@import "../../../../-/less/common.less";
+@import "../../../../../../../../modules-vendor/fed/jquery/ui/-/less/icons.less";
+
+@__nodeId__: ~"ewma_handlers_ui_handler_nodes__main_input";
+// }
+
+.@{__nodeId__} {
+    display: flex;
+
+    &.disabled {
+        opacity: 0.5;
+    }
+
+    > .bar {
+        flex-grow: 0;
+        cursor: pointer;
+
+        background-color: @input_bg_color;
+        color: @input_color;
+
+        > .container {
+            position: relative;
+
+            > input {
+                background-color: @input_bg_color + #101010;
+                color: @input_color;
+                box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3) inset;
+            }
+
+            > .info {
+                float: right;
+                min-width: 20px;
+                padding: 5px 5px 0;
+
+                .required {
+                    float: right;
+                    margin: 3px 2px;
+                    padding: 1px 3px;
+                    border-radius: 3px;
+                    font-size: 10px;
+                    font-weight: bold;
+                    background-color: @input_bg_color + #555555;
+                    color: @input_bg_color - #555555;
+                }
+
+                .combine_mode {
+                    float: right;
+                    font-size: 10px;
+                    margin: 2px;
+                    padding: 2px 3px 0;
+                    color: @input_bg_color + #444444;
+                }
+            }
+
+            > .path {
+                float: left;
+
+                .txt {
+                    padding: 8px;
+                    font-size: 11px;
+                    min-height: 11px;
+                    min-width: 13px;
+
+                    &.hover {
+                        text-decoration: underline;
+                    }
+
+                    &.disabled {
+
+                        &.hover {
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.hover {
+            background-color: darken(@input_bg_color, 5%);
+        }
+
+        min-width: 151px;
+    }
+
+    > .nodes {
+        flex-grow: 1;
+        margin: -1px 0;
+    }
+}

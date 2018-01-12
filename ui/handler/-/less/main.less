@@ -1,0 +1,54 @@
+// head {
+@import "common.less";
+
+@__nodeId__: ~"ewma_handlers_ui_handler__main";
+// }
+
+.@{__nodeId__} {
+
+    > .bar {
+        cursor: pointer;
+        background-color: @handler_bg_color;
+        color: @handler_color;
+
+        position: relative;
+
+        .button {
+            cursor: pointer;
+            float: left;
+            font-size: 11px;
+            padding: 7px;
+
+            &.hover {
+                background-color: lighten(@handler_bg_color, 5%);
+            }
+        }
+
+        > .info {
+            float: right;
+            min-width: 20px;
+            padding: 5px 5px 0;
+
+            .combine_mode {
+                float: right;
+                font-size: 10px;
+                margin: 2px;
+                padding: 0 3px;
+                color: @handler_bg_color + #444444;
+            }
+        }
+
+        &.hover {
+            background-color: darken(@handler_bg_color, 5%);
+        }
+    }
+
+    > .nodes {
+        margin: 0 -1px;
+        //border: 2px solid @handler_bg_color;
+
+        > .node {
+            margin: 1px;
+        }
+    }
+}

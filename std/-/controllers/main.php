@@ -41,18 +41,35 @@ class Main extends \Controller
 
     public function sessionNodeRead()
     {
-        if ($this->dataHas('path string')) {
+        if ($path = $this->data('path')) {
             return $this->app->rootController->s($this->data['path'], (array)$this->data('default_data'));
         }
     }
 
     public function sessionNodeWrite()
     {
-        if ($this->dataHas('path string')) {
+        if ($path = $this->data('path')) {
             $s = &$this->app->rootController->s($this->data['path']);
             $s = $this->data('data');
 
             return $s;
+        }
+    }
+
+    public function storageNodeRead()
+    {
+        if ($path = $this->data('path')) {
+            return $this->app->rootController->d($this->data['path'], (array)$this->data('default_data'));
+        }
+    }
+
+    public function storageNodeWrite()
+    {
+        if ($path = $this->data('path')) {
+            $d = &$this->app->rootController->d($this->data['path']);
+            $d = $this->data('data');
+
+            return $d;
         }
     }
 

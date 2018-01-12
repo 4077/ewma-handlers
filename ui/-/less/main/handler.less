@@ -1,0 +1,38 @@
+// head {
+@import "../../../../../../modules-vendor/fed/css/std/-/less/main.less";
+
+@__nodeId__: ~"ewma_handlers_ui__main_handler";
+// }
+
+.@{__nodeId__} {
+
+    > .path {
+        cursor: pointer;
+        float: left;
+        color: #6B415A;
+        padding: 6px 0;
+        margin-right: 10px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    > textarea {
+        width: 1px;
+        height: 1px;
+    }
+
+    > .compile_button {
+        .__button;
+        .blue;
+        .small;
+
+        float: right;
+        margin-right: 0;
+    }
+
+    > .handler {
+        margin-top: 5px;
+    }
+}
