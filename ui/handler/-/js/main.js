@@ -36,7 +36,10 @@ var __nodeNs__ = "ewma_handlers_ui_handler";
                 $cp = $("<div>")
                     .appendTo("body")
                     .addClass(__nodeId__ + "____cp")
-                    .css({position: 'absolute'});
+                    .css({
+                        position: 'absolute',
+                        zIndex:   1000000 // todo dataSets field
+                    });
             }
 
             return $cp;
