@@ -47,6 +47,8 @@ class Svc extends \ewma\service\Service
         }
 
         $this->compileIdsByPaths();
+
+        return count($handlers);
     }
 
     public function compile(\ewma\handlers\models\Handler $handler)

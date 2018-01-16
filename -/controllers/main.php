@@ -4,7 +4,7 @@ class Main extends \Controller
 {
     public function compile()
     {
-        handlers()->compileAll();
+        return 'handlers compiled: ' . handlers()->compileAll();
     }
 
     public function compileHandler()
