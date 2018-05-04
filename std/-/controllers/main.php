@@ -25,6 +25,13 @@ class Main extends \Controller
         }
     }
 
+    public function getObjectField()
+    {
+        if ($this->dataHas('object object, field string')) {
+            return $this->data['object']->{$this->data['field']};
+        }
+    }
+
     public function setObjectField()
     {
         if ($this->dataHas('object object, field string')) {
