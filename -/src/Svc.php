@@ -183,12 +183,27 @@ class Svc extends \ewma\service\Service
 
     public function duplicate(\ewma\handlers\models\Handler $handler)
     {
-        $newHandler = \ewma\handlers\models\Handler::create($handler->toArray());
+        return $this->import($this->export($handler));
+    }
 
-        $handlerRootNode = $this->getRootNode($handler);
-        $newHandlerRootNode = $this->getRootNode($newHandler);
+    public function export(\ewma\handlers\models\Handler $handler)
+    {
+        $rootNode = $this->getRootNode($handler);
 
-        $this->nodes->import($newHandlerRootNode, $this->nodes->export($handlerRootNode), true);
+        $output['handler'] = $handler->toArray();
+        $output['root_node'] = $rootNode->toArray();
+        $output['nodes'] = $this->nodes->export($rootNode);
+
+        return $output;
+    }
+
+    public function import($data)
+    {
+        $newHandler = \ewma\handlers\models\Handler::create($data['handler']);
+
+        $newHandlerRootNode = $this->getRootNode($newHandler, _j($data['root_node']['data']));
+
+        $this->nodes->import($newHandlerRootNode, $data['nodes'], true);
 
         return $newHandler;
     }
@@ -201,13 +216,15 @@ class Svc extends \ewma\service\Service
         handlers()->compileIdsByPaths();
 
         if ($withUsages) {
-            \ewma\handlers\models\Node::where('type', 'HANDLER')->where('source_handler_id', $handler->id)->delete();
+//            \ewma\handlers\models\Node::where('type', 'HANDLER')->where('source_handler_id', $handler->id)->delete();
+            \ewma\handlers\models\Node::where('type', 'HANDLER')->delete();
         }
     }
 
     public function getUsingHandlers(\ewma\handlers\models\Handler $handler)
     {
-        $nodesUsingHandler = \ewma\handlers\models\Node::where('type', 'HANDLER')->where('source_handler_id', $handler->id)->get();
+//        $nodesUsingHandler = \ewma\handlers\models\Node::where('type', 'HANDLER')->where('source_handler_id', $handler->id)->get();
+        $nodesUsingHandler = \ewma\handlers\models\Node::where('type', 'HANDLER')->get();
 
         $usingHandlersIds = [];
         foreach ($nodesUsingHandler as $node) {
@@ -217,14 +234,22 @@ class Svc extends \ewma\service\Service
         return \ewma\handlers\models\Handler::whereIn('id', $usingHandlersIds)->get();
     }
 
-    public function getRootNode(\ewma\handlers\models\Handler $handler)
+    /**
+     * @param models\Handler $handler
+     * @param null           $data
+     *
+     * @return models\Node
+     */
+    public function getRootNode(\ewma\handlers\models\Handler $handler, $data = null)
     {
         if (!$node = $handler->nodes()->where('type', 'ROOT')->first()) {
+            if (null === $data) {
+                $data = ['combine_mode' => 'concat'];
+            }
+
             $node = $handler->nodes()->create([
                                                   'type' => 'ROOT',
-                                                  'data' => j_([
-                                                                   'combine_mode' => 'concat'
-                                                               ])
+                                                  'data' => j_($data)
                                               ]);
         }
 

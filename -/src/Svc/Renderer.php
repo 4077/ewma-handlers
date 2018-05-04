@@ -137,7 +137,7 @@ class Renderer
         }
 
         if (false !== strpos($source, '{')) {
-            $source = \ewma\Data\Data::tokenize($source, $this->handlerData);
+            $source = $this->tokenize($source);
         }
 
         return handlers()->render($source, $data);
@@ -168,7 +168,7 @@ class Renderer
         $this->handlerData = $handlerDataBackup;
 
         if (false !== strpos($path, '{')) {
-            $path = \ewma\Data\Data::tokenize($path, $this->handlerData);
+            $path = $this->tokenize($path);
         }
 
         $output = appc($path, $data);
@@ -181,6 +181,11 @@ class Renderer
     }
 
     private function renderValue($value)
+    {
+        return $this->tokenize($value);
+    }
+
+    private function tokenize($value)
     {
         if (is_scalar($value)) {
             if (preg_match('/^\{([\w\/_-]*)\}$/', trim($value), $dataModifierPathMatch)) {

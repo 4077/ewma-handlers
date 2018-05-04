@@ -20,36 +20,9 @@ class Cats extends \ewma\service\Service
 
     public function duplicate(\ewma\handlers\models\Cat $cat)
     {
-        $tree = \ewma\Data\Tree::get(
-            \ewma\handlers\models\Cat::orderBy('position')
-        );
+        $newCat = \ewma\handlers\models\Cat::create($cat->toArray());
 
-        $newCat = $this->duplicateRecursion($tree, $cat);
-
-        return $newCat;
-    }
-
-    private function duplicateRecursion(\ewma\Data\Tree $tree, $cat, $parentCat = null)
-    {
-        $newCatData = $cat->toArray();
-        if (null !== $parentCat) {
-            $newCatData['parent_id'] = $parentCat->id;
-        }
-
-        $newCat = \ewma\handlers\models\Cat::create($newCatData);
-
-        $handlers = $cat->handlers()->orderBy('position')->get();
-        foreach ($handlers as $handler) {
-            $newHandler = handlers()->duplicate($handler);
-
-            $newHandler->target_id = $newCat->id;
-            $newHandler->save();
-        }
-
-        $subcats = $tree->getSubnodes($cat->id);
-        foreach ($subcats as $subcat) {
-            $this->duplicateRecursion($tree, $subcat, $newCat);
-        }
+        $this->import($newCat, $this->export($cat), true);
 
         return $newCat;
     }
@@ -90,10 +63,7 @@ class Cats extends \ewma\service\Service
     {
         $handlers = $cat->handlers()->orderBy('position')->get();
         foreach ($handlers as $handler) {
-            $this->exportOutput['handlers'][$cat->id][] = [
-                'handler' => $handler->toArray(),
-                'nodes'   => handlers()->nodes->export(handlers()->getRootNode($handler))
-            ];
+            $this->exportOutput['handlers'][$cat->id][] = $this->svc->export($handler);
         }
 
         $subcats = $tree->getSubnodes($cat->id);
@@ -125,9 +95,9 @@ class Cats extends \ewma\service\Service
 
         if (!empty($importData['handlers'][$catId])) {
             foreach ($importData['handlers'][$catId] as $handlerData) {
-                $newHandler = $newCat->handlers()->create($handlerData['handler']);
+                $handlerData['handler']['target_id'] = $newCat->id;
 
-                handlers()->nodes->import(handlers()->getRootNode($newHandler), $handlerData['nodes'], true);
+                $this->svc->import($handlerData);
             }
         }
 
@@ -137,5 +107,4 @@ class Cats extends \ewma\service\Service
             }
         }
     }
-
 }
