@@ -105,7 +105,7 @@ class Node extends \Controller
 
         $this->css(':\jquery\ui icons');
 
-        if (!$isRootCat) {
+//        if (!$isRootCat) {
             $this->c('\std\ui button:bind', [
                 'selector' => $this->_selector('|' . $this->viewInstance),
                 'path'     => '>xhr:select|',
@@ -113,7 +113,7 @@ class Node extends \Controller
                     'cat' => $catXPack
                 ]
             ]);
-        }
+//        }
 
         return $v;
     }
