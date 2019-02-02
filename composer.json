@@ -10,10 +10,6 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "fed/ewma-module-installer-plugin": "~0.0.1",
-        "fed/tree": "^0.0",
-        "fed/dialogs": "^0.0",
-        "fed/ui": "^0.0",
-        "fed/exchange": "^0.0"
+        "fed/ewma-module-installer-plugin": "~0.0.1"
     }
 }
