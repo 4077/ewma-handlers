@@ -1,5 +1,5 @@
 {
-    "name": "fed/handlers",
+    "name": "fed/ewma-handlers",
     "type": "ewma-module",
     "description": "ewma handlers",
     "authors": [
