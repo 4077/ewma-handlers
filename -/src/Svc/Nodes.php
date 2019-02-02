@@ -34,7 +34,7 @@ class Nodes extends \ewma\service\Service
                                                    'type'       => 'HANDLER',
                                                    'data'       => j_([
                                                                           'source'   => '',
-                                                                          'mappings' => '*'
+                                                                          'mappings' => ''
                                                                       ])
                                                ]);
 

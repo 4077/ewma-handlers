@@ -40,7 +40,7 @@ class DataModifier extends \Controller
                            'path'              => '>xhr:updatePath',
                            'data'              => $requestsData,
                            'class'             => 'txt',
-                           'title'             => 'Путь к узлу данных, с которыми будет создан контроллер вызываемого метода',
+                           'title'             => 'Путь к узлу данных в текущей области видимости',
                            'placeholder'       => '...',
                            'fitInputToClosest' => '.container',
                            'content'           => $nodeData['path']
@@ -61,7 +61,7 @@ class DataModifier extends \Controller
 
         $this->css();
 
-        $this->css(':\jquery\ui icons');
+        $this->css(':\js\jquery\ui icons');
 
         $this->e('ewma/handlers/nodes/update', ['type' => 'data_modifier'])->rebind(':reload');
 

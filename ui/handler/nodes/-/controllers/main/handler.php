@@ -95,7 +95,7 @@ class Handler extends \Controller
             ]);
         }
 
-        $this->css(':\jquery\ui icons');
+        $this->css(':\js\jquery\ui icons');
 
         $this->e('ewma/handlers/nodes/update', ['type' => 'handler'])->rebind(':reload');
 

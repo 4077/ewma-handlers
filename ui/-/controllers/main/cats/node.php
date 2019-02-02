@@ -91,7 +91,7 @@ class Node extends \Controller
                            'title'   => 'Удалить',
                            'content' => '<div class="icon"></div>'
                        ]),
-                       'COMPILE_BUTTON'        => $this->c('\std\ui button:view', [
+                       'COMPILE_BUTTON'   => $this->c('\std\ui button:view', [
                            'visible' => $isRootCat,
                            'path'    => '>xhr:compile|',
                            'data'    => [
@@ -103,16 +103,17 @@ class Node extends \Controller
                        ])
                    ]);
 
-        $this->css(':\jquery\ui icons');
+        $this->css(':\js\jquery\ui icons');
 
 //        if (!$isRootCat) {
-            $this->c('\std\ui button:bind', [
-                'selector' => $this->_selector('|' . $this->viewInstance),
-                'path'     => '>xhr:select|',
-                'data'     => [
-                    'cat' => $catXPack
-                ]
-            ]);
+        $this->c('\std\ui button:bind', [
+            'selector' => $this->_selector('|' . $this->viewInstance),
+            'path'     => '>xhr:select|',
+            'data'     => [
+                'cat' => $catXPack
+            ]
+        ]);
+
 //        }
 
         return $v;

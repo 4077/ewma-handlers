@@ -2,42 +2,37 @@
 
 class Dev extends \Controller
 {
-    public function test()
+    public function getOrphanedTargetsPacks()
     {
-        return handlers()->render('test:content');
+        $handlers = \ewma\handlers\models\Handler::all();
+
+        $packs = [];
+
+        foreach ($handlers as $handler) {
+            if (!$handler->target) {
+                $packs[] = [
+                    $handler->target_type . ':' . $handler->target_id
+                ];
+            }
+        }
+
+        return $packs;
     }
 
-    public function j()
+    public function deleteOrphanedHandlers()
     {
-        return p($this->data, true);
-    }
+        $handlers = \ewma\handlers\models\Handler::all();
 
+        $deletedCount = 0;
 
-    public function k()
-    {
-        return $this->data;
-    }
+        foreach ($handlers as $handler) {
+            if (!$handler->target) {
+                handlers()->delete($handler);
 
-    public function examples()
-    {
-        handlers()->render(546, [
-            'x' => 24,
-            'y' => 144
-        ]);
+                $deletedCount++;
+            }
+        }
 
-        $this->c('\ewma\handlers~:render', [
-            'source' => 546,
-            'data'   => [
-                'x' => 24,
-                'y' => 144
-            ]
-        ]);
-
-        handlers()->render('dep/post-update:dev', [
-            'reset' => [
-                'ui'            => true,
-                'sessionEvents' => false
-            ]
-        ]);
+        return 'deleted handlers: ' . $deletedCount;
     }
 }

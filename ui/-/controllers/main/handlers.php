@@ -112,7 +112,7 @@ class Handlers extends \Controller
             $this->e('ewma/handlers/update/cat')->rebind(':reload');
         }
 
-        $this->css(':\css\std~, \jquery\ui icons');
+        $this->css(':\css\std~, \js\jquery\ui icons');
 
         return $v;
     }

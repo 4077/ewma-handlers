@@ -61,7 +61,7 @@ class Input extends \Controller
 
         $this->css();
 
-        $this->css(':\jquery\ui icons');
+        $this->css(':\js\jquery\ui icons');
 
         $this->e('ewma/handlers/nodes/update', ['type' => 'input'])->rebind(':reload');
 
