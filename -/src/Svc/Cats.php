@@ -13,6 +13,17 @@ class Cats extends \ewma\service\Service
     //
     //
 
+    public function getRootCat()
+    {
+        if (!$node = \ewma\handlers\models\Cat::where('parent_id', 0)->first()) {
+            $node = \ewma\handlers\models\Cat::create([
+                                                          'parent_id' => 0
+                                                      ]);
+        }
+
+        return $node;
+    }
+
     public function create(\ewma\handlers\models\Cat $cat)
     {
         return $cat->nested()->create([]);
