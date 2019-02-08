@@ -1,0 +1,219 @@
+{
+    "cat_id": 259,
+    "cats": {
+        "nodes_by_id": {
+            "259": {
+                "id": 259,
+                "parent_id": 257,
+                "position": 10,
+                "name": "ewma-handlers",
+                "path": "modules\/ewma-handlers"
+            },
+            "260": {
+                "id": 260,
+                "parent_id": 259,
+                "position": 0,
+                "name": "std",
+                "path": "modules\/ewma-handlers\/std"
+            }
+        },
+        "ids_by_parent": {
+            "259": [
+                260
+            ]
+        },
+        "parents_by_id": {
+            "260": 259
+        },
+        "ids_by_order": [
+            260
+        ]
+    },
+    "handlers": {
+        "260": [
+            {
+                "handler": {
+                    "id": 1296,
+                    "target_type": "ewma\\handlers\\models\\Cat",
+                    "target_id": 260,
+                    "cat_position": 0,
+                    "position": 7980,
+                    "instance": "",
+                    "name": "if",
+                    "path": "modules\/ewma-handlers\/std:if"
+                },
+                "root_node": {
+                    "id": 10763,
+                    "handler_id": 1296,
+                    "parent_id": 0,
+                    "name": "",
+                    "source_handler_id": 0,
+                    "position": 10,
+                    "enabled": 1,
+                    "type": "ROOT",
+                    "required": 0,
+                    "cache_enabled": 0,
+                    "data": "{\"combine_mode\":\"concat\",\"mappings\":\"*\"}",
+                    "mappings": ""
+                },
+                "nodes": {
+                    "node_id": 10763,
+                    "node_type": "ROOT",
+                    "nodes": {
+                        "nodes_by_id": {
+                            "10763": {
+                                "id": 10763,
+                                "handler_id": 1296,
+                                "parent_id": 0,
+                                "name": "",
+                                "source_handler_id": 0,
+                                "position": 10,
+                                "enabled": 1,
+                                "type": "ROOT",
+                                "required": 0,
+                                "cache_enabled": 0,
+                                "data": "{\"combine_mode\":\"concat\",\"mappings\":\"*\"}",
+                                "mappings": ""
+                            },
+                            "10764": {
+                                "id": 10764,
+                                "handler_id": 1296,
+                                "parent_id": 10763,
+                                "name": "",
+                                "source_handler_id": 0,
+                                "position": 20,
+                                "enabled": 1,
+                                "type": "CALL",
+                                "required": 0,
+                                "cache_enabled": 0,
+                                "data": "{\"name\":\"\",\"path\":\"\\\\ewma\\\\handlers\\\\std~:_if\",\"desc\":\"\",\"mappings\":\"*\"}",
+                                "mappings": ""
+                            },
+                            "10765": {
+                                "id": 10765,
+                                "handler_id": 1296,
+                                "parent_id": 10764,
+                                "name": "",
+                                "source_handler_id": 0,
+                                "position": 30,
+                                "enabled": 1,
+                                "type": "INPUT",
+                                "required": 0,
+                                "cache_enabled": 0,
+                                "data": "{\"name\":\"\",\"path\":\"value\",\"desc\":\"\",\"combine_mode\":\"first\",\"mappings\":\"*\"}",
+                                "mappings": ""
+                            },
+                            "10766": {
+                                "id": 10766,
+                                "handler_id": 1296,
+                                "parent_id": 10765,
+                                "name": "",
+                                "source_handler_id": 0,
+                                "position": 40,
+                                "enabled": 1,
+                                "type": "VALUE",
+                                "required": 0,
+                                "cache_enabled": 0,
+                                "data": "{\"name\":\"\",\"type\":\"string\",\"value\":{\"string\":\"{value}\",\"array\":[],\"bool\":false},\"mappings\":\"*\"}",
+                                "mappings": ""
+                            },
+                            "10767": {
+                                "id": 10767,
+                                "handler_id": 1296,
+                                "parent_id": 10764,
+                                "name": "",
+                                "source_handler_id": 0,
+                                "position": 50,
+                                "enabled": 1,
+                                "type": "INPUT",
+                                "required": 0,
+                                "cache_enabled": 0,
+                                "data": "{\"name\":\"\",\"path\":\"true\",\"desc\":\"\",\"combine_mode\":\"first\",\"mappings\":\"*\"}",
+                                "mappings": ""
+                            },
+                            "10768": {
+                                "id": 10768,
+                                "handler_id": 1296,
+                                "parent_id": 10767,
+                                "name": "",
+                                "source_handler_id": 0,
+                                "position": 60,
+                                "enabled": 1,
+                                "type": "VALUE",
+                                "required": 0,
+                                "cache_enabled": 0,
+                                "data": "{\"name\":\"\",\"type\":\"string\",\"value\":{\"string\":\"{true}\",\"array\":[],\"bool\":false},\"mappings\":\"*\"}",
+                                "mappings": ""
+                            },
+                            "10769": {
+                                "id": 10769,
+                                "handler_id": 1296,
+                                "parent_id": 10764,
+                                "name": "",
+                                "source_handler_id": 0,
+                                "position": 70,
+                                "enabled": 1,
+                                "type": "INPUT",
+                                "required": 0,
+                                "cache_enabled": 0,
+                                "data": "{\"name\":\"\",\"path\":\"false\",\"desc\":\"\",\"combine_mode\":\"first\",\"mappings\":\"*\"}",
+                                "mappings": ""
+                            },
+                            "10770": {
+                                "id": 10770,
+                                "handler_id": 1296,
+                                "parent_id": 10769,
+                                "name": "",
+                                "source_handler_id": 0,
+                                "position": 80,
+                                "enabled": 1,
+                                "type": "VALUE",
+                                "required": 0,
+                                "cache_enabled": 0,
+                                "data": "{\"name\":\"\",\"type\":\"string\",\"value\":{\"string\":\"{false}\",\"array\":[],\"bool\":false},\"mappings\":\"*\"}",
+                                "mappings": ""
+                            }
+                        },
+                        "ids_by_parent": {
+                            "10763": [
+                                10764
+                            ],
+                            "10764": [
+                                10765,
+                                10767,
+                                10769
+                            ],
+                            "10765": [
+                                10766
+                            ],
+                            "10767": [
+                                10768
+                            ],
+                            "10769": [
+                                10770
+                            ]
+                        },
+                        "parents_by_id": {
+                            "10764": 10763,
+                            "10765": 10764,
+                            "10766": 10765,
+                            "10767": 10764,
+                            "10768": 10767,
+                            "10769": 10764,
+                            "10770": 10769
+                        },
+                        "ids_by_order": [
+                            10764,
+                            10765,
+                            10766,
+                            10767,
+                            10768,
+                            10769,
+                            10770
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}
