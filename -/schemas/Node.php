@@ -14,7 +14,7 @@ class Node extends \Schema
             $table->integer('parent_id')->default(0);
             $table->integer('source_handler_id')->default(0); // todo del
             $table->integer('position')->default(0);
-            $table->boolean('enabled')->default(false);
+            $table->boolean('enabled')->default(true);
             $table->string('name')->default('');
             $table->enum('type', ['ROOT','CALL','INPUT','HANDLER','VALUE','DATA_MODIFIER'])->default('ROOT');
             $table->boolean('required')->default(false);
